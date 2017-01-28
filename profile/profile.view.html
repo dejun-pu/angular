@@ -1,0 +1,27 @@
+<h1>Hi {{vm.user.firstName}}!</h1>
+<p>You're logged in!!</p>
+<h3>Your Profile:</h3>
+     <li >
+        <h5 style="color:blue;display:inline">username:</h5> {{vm.user.username}}
+	</li>
+     <li>		
+	     <h5 style="color:blue;display:inline">firstname:</h5>{{vm.user.firstName}} 
+	</li>
+	<li>  
+		 <h5 style="color:blue;display:inline">lastname:</h5>{{vm.user.lastName}}				
+	</li>
+	<li>		
+	     <h5 style="color:blue;display:inline">email:</h5>{{vm.user.Email}}     			
+	</li>
+	<li>		
+	     <h5 style="color:blue;display:inline">location:</h5>{{vm.user.Location}}     			
+	</li>
+	<li>		
+	   <h5 style="color:blue;display:inline"> phone:</h5>{{vm.user.Phone}}     			
+	</li>
+	<li>
+         <a href="#!/login" class="btn btn-primary" ng-click="vm.deleteUser(vm.user.username)">Delete</a>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><a href="#!/login" class="btn btn-primary">Logout</a></p>

@@ -1,0 +1,45 @@
+<h1>Message</h1>
+<style>
+.message{
+float:right;
+margin-right:5px;
+}
+#chat{
+  background-color:white;
+  margin:0 auto;
+  margin-top:60px;
+  text-align:center;
+  width:100%;
+  border:solid 1px;
+}
+</style>
+<h2 style="display:inline">User: </h2><h2 style="display:inline" id="me">{{vm.user.username}}</h2>
+<table ng-controller="HomeController">
+<tr ng-repeat="user in vm.allUsers" style="border:solid 1px">
+<td >Friends:{{user.username}}<a  href class="btn btn-primary message" ng-model='user.username' ng-click="say(this)">Message</a></td>
+</tr>
+</table>
+<div><input  type="text" placeholder="title" name="title" ng-model="title"/></div>
+<div><input type="text" placeholder="discription" name="description" style="height:180px;" ng-model="description"/></div>
+<a href class="btn btn-primary" onclick="show()">ShowInfo</a>
+<script>
+function show(){
+var obj=JSON.parse(localStorage.getItem("chat"));
+var html="<div id='chat'><h5>";
+   for(var i=0;i<obj.length;i++){
+   var me=document.getElementById('me').innerHTML;
+   if(obj[i].sender===me||obj[i].recipient===me){
+      html+="From : "+obj[i].recipient+"   To: "+obj[i].sender+"<br/>";
+	  html+="Title: "+obj[i].title+"<br/>"+"Description  :"+obj[i].description+"<br/>";
+	 }
+  }
+html+="</h5></div><a id='hid' class='btn btn-primary' onclick='hide()'>Hide</a>";
+document.getElementById("chatContent").innerHTML=html;
+}
+function hide(){
+    document.getElementById("chat").style.display="none";
+	 document.getElementById("hid").style.display="none";
+}
+</script>
+<div id="chatContent">
+</div>
