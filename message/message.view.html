@@ -14,23 +14,26 @@ margin-right:5px;
 }
 </style>
 <h2 style="display:inline">User: </h2><h2 style="display:inline" id="me">{{vm.user.username}}</h2>
-<table ng-controller="HomeController">
-<tr ng-repeat="user in vm.allUsers" style="border:solid 1px">
-<td >Friends:{{user.username}}<a  href class="btn btn-primary message" ng-model='user.username' ng-click="say(this)">Message</a></td>
+<table ng-controller="HomeController" class="table table-hover">
+<tr ng-repeat="user in vm.allUsers"  class="detail">
+<td >Friends:</td ><td >{{user.username}}</td ><td ><a  href class="btn btn-primary message" ng-model='user.username' ng-click="say(this)">Reply</a></td>
+<td><a href class="btn btn-primary"  onclick="show(this)">ShowHistory</a></td><td><a href="http://127.0.0.1:8080/#!/Message" class="btn btn-primary" ng-model="user.username" ng-click="del(this)">Delete</a></td>
 </tr>
 </table>
-<div><input  type="text" placeholder="title" name="title" ng-model="title"/></div>
-<div><input type="text" placeholder="discription" name="description" style="height:180px;" ng-model="description"/></div>
-<a href class="btn btn-primary" onclick="show()">ShowInfo</a>
+<div><input class="form-control" type="text" placeholder="title" name="title" ng-model="title"/></div>
+<div><input class="form-control" type="text" placeholder="discription" name="description" style="height:180px;" ng-model="description"/></div>
 <script>
-function show(){
+function show(come){
 var obj=JSON.parse(localStorage.getItem("chat"));
+var ob=come.parentNode.previousSibling.previousSibling.previousSibling.innerHTML;
+alert(ob);
 var html="<div id='chat'><h5>";
    for(var i=0;i<obj.length;i++){
    var me=document.getElementById('me').innerHTML;
-   if(obj[i].sender===me||obj[i].recipient===me){
+   if((obj[i].sender===me||obj[i].recipient===me)&&(ob==obj[i].sender||obj[i].recipient===ob)){
       html+="From : "+obj[i].recipient+"   To: "+obj[i].sender+"<br/>";
 	  html+="Title: "+obj[i].title+"<br/>"+"Description  :"+obj[i].description+"<br/>";
+	  html+="Date: "+obj[i].date+"<br/>";
 	 }
   }
 html+="</h5></div><a id='hid' class='btn btn-primary' onclick='hide()'>Hide</a>";

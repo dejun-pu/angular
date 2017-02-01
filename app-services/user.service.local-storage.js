@@ -54,8 +54,7 @@
                             var users = getUsers();
 
                             // assign id
-                            var lastUser = users[users.length - 1] || { id: 0 };
-                            user.id = lastUser.id + 1;
+                            var lastUser = users[users.length - 1] || {  };
 
                             // save to local storage
                             users.push(user);

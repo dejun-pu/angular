@@ -9,7 +9,8 @@
 		    "recipient":"Arun",
             "sender":"Nanda",
             "title":"This is a sample message to Arun.",
-            "description":"This is a sample description to the message which has the above title"
+            "description":"This is a sample description to the message which has the above title",
+			"date":""
 		}
 		
     HomeController.$inject = ['UserService', '$rootScope','$scope'];
@@ -46,13 +47,28 @@
                 loadAllUsers();
             });
         }
-
+        $scope.update=function(){	
+		UserService.Delete($scope.username);
+		UserService.Create(vm.user);
+		}
+		$scope.getName=function(obj){
+		$scope.username=obj.username;
+		alert($scope.username);
+		}
+		$scope.del=function(u){
+		   UserService.Delete(u.user.username);
+		  location.reload();
+		   alert("successful deletion!!");
+		}
 		$scope.say=function(u){
+			alert("Successfully sent message!!");
 		  json.recipient=vm.user.username;	 
 		  json.sender=u.user.username;
 		  json.title=$scope.title;
 		  json.description=$scope.description;
+		  json.date=new Date();
 		  list.push(json);
+		 
 	       if(localStorage.getItem("chat")===null){
 		  localStorage.setItem("chat",JSON.stringify(list));
 		  }

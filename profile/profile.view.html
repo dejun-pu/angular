@@ -1,27 +1,42 @@
 <h1>Hi {{vm.user.firstName}}!</h1>
 <p>You're logged in!!</p>
 <h3>Your Profile:</h3>
-     <li >
-        <h5 style="color:blue;display:inline">username:</h5> {{vm.user.username}}
-	</li>
-     <li>		
-	     <h5 style="color:blue;display:inline">firstname:</h5>{{vm.user.firstName}} 
-	</li>
-	<li>  
-		 <h5 style="color:blue;display:inline">lastname:</h5>{{vm.user.lastName}}				
-	</li>
-	<li>		
-	     <h5 style="color:blue;display:inline">email:</h5>{{vm.user.Email}}     			
-	</li>
-	<li>		
-	     <h5 style="color:blue;display:inline">location:</h5>{{vm.user.Location}}     			
-	</li>
-	<li>		
-	   <h5 style="color:blue;display:inline"> phone:</h5>{{vm.user.Phone}}     			
-	</li>
-	<li>
-         <a href="#!/login" class="btn btn-primary" ng-click="vm.deleteUser(vm.user.username)">Delete</a>
-    </li>
-</ul>
+<style>
+.profileEdit{
+     display:none;
+	 
+}    
+#hide{
+visibility:hidden;
+}
+th{
+width:180px;
+}
+</style>
+<script>
+     function toggle(obj){
+	 alert("show");
+	  var show= document.getElementById("hide");
+	  show.style.visibility="visible";
+	 }
+	 function update(){
+	    var show= document.getElementById("hide");
+	  show.style.visibility="hidden";
+	 }
+</script>
+<form name="form" ng-submit="vm.register()" role="form">
+<table >
+   <tr >
+  <th >firstname</th><th>lastname</th> <th>username</th> <th>password</th><th>email</th><th>phoneNumber</th><th>location</th> <th>Edit</th> <th>Save</th> 
+   </tr>
+   <tr >
+  <td ng-repeat="var in vm.user">{{var}}</td> <td><input type="button" ng-click="getName(vm.user)" onclick="toggle(this)" value="Edit"></td><td><button type="submit"  onclick="update()" ng-click="update()">save</button>
+   </tr>
+   <tr id="hide"><td><input type='text' ng-model='vm.user.firstName'></td>
+<td><input type='text' ng-model='vm.user.lastName'></td><td><input type='text' ng-model='vm.user.username'></td>
+<td><input type='text' ng-model='vm.user.password'></td><td><input type='text' ng-model='vm.user.Email'></td><td><input type='text' ng-model='vm.user.Phone'></td>
+<td><input type='text' ng-model='vm.user.Location'></td></tr>
+</table>
+</form>
 <p>&nbsp;</p>
 <p><a href="#!/login" class="btn btn-primary">Logout</a></p>
